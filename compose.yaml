@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  bankAccountDB:
+    image: mysql:8.1.0
+    environment:
+      MYSQL_DATABASE: BankDB
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - '3307:3306'
+
+    volumes:
+      - ./src/main/resources/docker/sql/databaseInitFile.sql:/docker-entrypoint-initdb.d/1_databaseInitFile.sql
+      - ./src/main/resources/docker/sql/initTablesWithData.sql:/docker-entrypoint-initdb.d/2_initBankAccount.sql

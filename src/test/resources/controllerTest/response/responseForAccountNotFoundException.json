@@ -1,0 +1,5 @@
+{
+  "message": "Account not found for id : 1",
+  "httpStatusCode": 404,
+  "errorCodeType": "FUNCTIONAL"
+}

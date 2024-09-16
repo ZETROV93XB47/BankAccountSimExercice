@@ -1,0 +1,5 @@
+{
+  "message": "Your Deposit value exceed the deposit limit on your account",
+  "httpStatusCode": 403,
+  "errorCodeType": "FUNCTIONAL"
+}

@@ -1,0 +1,5 @@
+{
+  "message": "Le montant que vous tentez de retirer est supérieur au montant autorisé pour votre compte",
+  "httpStatusCode": 403,
+  "errorCodeType": "FUNCTIONAL"
+}
