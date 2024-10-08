@@ -14,24 +14,20 @@ import com.example.bank.demo.domain.ports.out.operation.OperationRepositoryPort;
 import com.example.bank.demo.domain.ports.out.saving_account.SavingAccountRepositoryPort;
 import com.example.bank.demo.domain.ports.useCase.MakeWithDrawalUseCase;
 import com.example.bank.demo.domain.utils.DateProvider;
-import com.example.bank.demo.infrastructure.repository.BankAccountRepository;
-import com.example.bank.demo.infrastructure.repository.BankRepository;
-import com.example.bank.demo.infrastructure.repository.OperationRepository;
-import com.example.bank.demo.infrastructure.repository.SavingAccountRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static com.example.bank.demo.domain.model.enumpackage.TypeOperation.RETRAIT;
+import static com.example.bank.demo.domain.model.enumpackage.TypeOperation.WITHDRAWAL;
 
 @Slf4j
-@Component
+@Service
 @RequiredArgsConstructor
 public class MakeWithdrawalUseCaseService implements MakeWithDrawalUseCase {
 
@@ -94,7 +90,7 @@ public class MakeWithdrawalUseCaseService implements MakeWithDrawalUseCase {
     }
 
     private void saveAssociatedOperation(BigDecimal withdrawalValue, Bank accountForwithdrawal) {
-        Operation operation = new Operation(null, accountForwithdrawal, RETRAIT, withdrawalValue, accountForwithdrawal.getAccountType(), dateProvider.getCurrentDate());
+        Operation operation = new Operation(null, accountForwithdrawal, WITHDRAWAL, withdrawalValue, accountForwithdrawal.getAccountType(), dateProvider.getCurrentDate());
 
         operationRepositoryPort.saveOperation(operation);
 

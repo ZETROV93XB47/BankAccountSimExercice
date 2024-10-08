@@ -10,14 +10,13 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-
 @Setter
 @Getter
 @Entity
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "saving_account")
 public class SavingAccount extends Bank {
 

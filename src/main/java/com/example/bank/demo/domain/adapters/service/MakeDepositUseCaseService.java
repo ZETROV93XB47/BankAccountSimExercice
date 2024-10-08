@@ -7,27 +7,26 @@ import com.example.bank.demo.domain.model.Bank;
 import com.example.bank.demo.domain.model.BankAccount;
 import com.example.bank.demo.domain.model.Operation;
 import com.example.bank.demo.domain.model.SavingAccount;
+import com.example.bank.demo.domain.ports.mapper.DepositResponseDtoMapperPort;
 import com.example.bank.demo.domain.ports.out.bank.BankRepositoryPort;
 import com.example.bank.demo.domain.ports.out.bank_account.BankAccountRepositoryPort;
 import com.example.bank.demo.domain.ports.out.operation.OperationRepositoryPort;
-import com.example.bank.demo.domain.ports.mapper.DepositResponseDtoMapperPort;
 import com.example.bank.demo.domain.ports.out.saving_account.SavingAccountRepositoryPort;
 import com.example.bank.demo.domain.utils.DateProvider;
-import com.example.bank.demo.infrastructure.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static com.example.bank.demo.domain.model.enumpackage.TypeOperation.DEPOT;
+import static com.example.bank.demo.domain.model.enumpackage.TypeOperation.DEPOSIT;
 
 @Slf4j
-@Component
+@Service
 @RequiredArgsConstructor
 public class MakeDepositUseCaseService implements com.example.bank.demo.domain.ports.useCase.MakeDepositUseCase {
 
@@ -86,7 +85,7 @@ public class MakeDepositUseCaseService implements com.example.bank.demo.domain.p
     }
 
     private void saveAssociatedOperation(BigDecimal depositValue, Bank accountForDeposit) {
-        Operation operation = new Operation(null, accountForDeposit, DEPOT, depositValue, accountForDeposit.getAccountType(), dateProvider.getCurrentDate());
+        Operation operation = new Operation(null, accountForDeposit, DEPOSIT, depositValue, accountForDeposit.getAccountType(), dateProvider.getCurrentDate());
 
         operationRepositoryPort.saveOperation(operation);
 

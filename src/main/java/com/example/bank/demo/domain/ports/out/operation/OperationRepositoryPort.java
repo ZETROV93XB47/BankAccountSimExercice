@@ -9,5 +9,7 @@ import java.util.Optional;
 public interface OperationRepositoryPort {
     Optional<List<Operation>> findByAccountIdOrderByDateOperationDesc(Bank accountId);
 
+    List<Operation> findAll();
+
     Operation saveOperation (Operation operation);
 }

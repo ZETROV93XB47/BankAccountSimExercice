@@ -5,13 +5,14 @@ import com.example.bank.demo.domain.dto.response.WithdrawalResponseDto;
 import com.example.bank.demo.domain.exceptions.AccountNotFoundException;
 import com.example.bank.demo.domain.exceptions.WithdrawalAmountBiggerThanBalanceException;
 import com.example.bank.demo.domain.model.BankAccount;
+import com.example.bank.demo.domain.model.Operation;
 import com.example.bank.demo.domain.model.SavingAccount;
 import com.example.bank.demo.domain.ports.mapper.WithdrawalResponseDtoMapperPort;
+import com.example.bank.demo.domain.ports.out.bank.BankRepositoryPort;
+import com.example.bank.demo.domain.ports.out.bank_account.BankAccountRepositoryPort;
+import com.example.bank.demo.domain.ports.out.operation.OperationRepositoryPort;
+import com.example.bank.demo.domain.ports.out.saving_account.SavingAccountRepositoryPort;
 import com.example.bank.demo.domain.utils.DateProvider;
-import com.example.bank.demo.infrastructure.repository.BankAccountRepository;
-import com.example.bank.demo.infrastructure.repository.BankRepository;
-import com.example.bank.demo.infrastructure.repository.OperationRepository;
-import com.example.bank.demo.infrastructure.repository.SavingAccountRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,19 +35,19 @@ import static org.mockito.Mockito.*;
 class MakeWithdrawaltUseCaseServiceTest {
 
     @Mock
-    private BankRepository bankRepository;
+    private BankRepositoryPort bankRepositoryPort;
 
     @Mock
     private DateProvider dateProvider;
 
     @Mock
-    private OperationRepository operationRepository;
+    private OperationRepositoryPort operationRepositoryPort;
 
     @Mock
-    private BankAccountRepository bankAccountRepository;
+    private BankAccountRepositoryPort bankAccountRepositoryPort;
 
     @Mock
-    private SavingAccountRepository savingAccountRepository;
+    private SavingAccountRepositoryPort savingAccountRepositoryPort;
 
     @Mock
     private WithdrawalResponseDtoMapperPort withdrawalResponseDtoMapperPort;
@@ -62,15 +63,15 @@ class MakeWithdrawaltUseCaseServiceTest {
         WithdrawalResponseDto responseDto = WithdrawalResponseDto.builder().accountNumber(account.getAccountNumber().toString()).balance(account.getBalance()).build();
 
         //When
-        when(bankRepository.findById(1L)).thenReturn(Optional.of(account));
+        when(bankRepositoryPort.findById(1L)).thenReturn(Optional.of(account));
         when(withdrawalResponseDtoMapperPort.mapToWithdrawalResponseDto(account)).thenReturn(responseDto);
         when(dateProvider.getCurrentDate()).thenReturn(LocalDateTime.of(2024, 5, 14, 16, 24, 30));
 
         WithdrawalResponseDto response = makeWithdrawalUseCaseService.makeWithdrawal(new BigDecimal(withdrawalValue), 1L);
 
         //Then
-        verify(bankRepository, times(1)).findById(1L);
-        //verify(operationRepository, times(1)).save(any(Operation.class));
+        verify(bankRepositoryPort, times(1)).findById(1L);
+        verify(operationRepositoryPort, times(1)).saveOperation(any(Operation.class));
         verify(withdrawalResponseDtoMapperPort, times(1)).mapToWithdrawalResponseDto(account);
 
         assertThat(response.getBalance()).isEqualTo(new BigDecimal(withdrawalValue));
@@ -84,15 +85,15 @@ class MakeWithdrawaltUseCaseServiceTest {
         WithdrawalResponseDto responseDto = WithdrawalResponseDto.builder().accountNumber(account.getAccountNumber().toString()).balance(account.getBalance()).build();
 
         //When
-        when(bankRepository.findById(1L)).thenReturn(Optional.of(account));
+        when(bankRepositoryPort.findById(1L)).thenReturn(Optional.of(account));
         when(withdrawalResponseDtoMapperPort.mapToWithdrawalResponseDto(account)).thenReturn(responseDto);
         when(dateProvider.getCurrentDate()).thenReturn(LocalDateTime.of(2024, 5, 14, 16, 24, 30));
 
         WithdrawalResponseDto response = makeWithdrawalUseCaseService.makeWithdrawal(new BigDecimal(initBalance), 1L);
 
         //Then
-        verify(bankRepository, times(1)).findById(1L);
-        //verify(operationRepository, times(1)).save(any(Operation.class));
+        verify(bankRepositoryPort, times(1)).findById(1L);
+        verify(operationRepositoryPort, times(1)).saveOperation(any(Operation.class));
         verify(withdrawalResponseDtoMapperPort, times(1)).mapToWithdrawalResponseDto(account);
 
         assertThat(response.getBalance()).isEqualTo(new BigDecimal(initBalance));
@@ -103,7 +104,7 @@ class MakeWithdrawaltUseCaseServiceTest {
         //Given
         int initBalance = 100;
         //When
-        when(bankRepository.findById(1L)).thenThrow(new AccountNotFoundException("Account not found"));
+        when(bankRepositoryPort.findById(1L)).thenThrow(new AccountNotFoundException("Account not found"));
 
         assertThatExceptionOfType(AccountNotFoundException.class)
                 .isThrownBy(() -> makeWithdrawalUseCaseService.makeWithdrawal(new BigDecimal(initBalance), 1L))
@@ -117,7 +118,7 @@ class MakeWithdrawaltUseCaseServiceTest {
         BankAccount account = new BankAccount(1L, UUID.randomUUID(), new BigDecimal(withdrawalValue), CLASSIC_ACCOUNT, new ArrayList<>(), new BigDecimal(10000));
 
         //When
-        when(bankRepository.findById(1L)).thenReturn(Optional.of(account));
+        when(bankRepositoryPort.findById(1L)).thenReturn(Optional.of(account));
 
         assertThatExceptionOfType(WithdrawalAmountBiggerThanBalanceException.class)
                 .isThrownBy(() -> makeWithdrawalUseCaseService.makeWithdrawal(new BigDecimal(20000), 1L))

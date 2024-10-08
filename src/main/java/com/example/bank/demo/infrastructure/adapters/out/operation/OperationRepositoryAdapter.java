@@ -21,6 +21,11 @@ public class OperationRepositoryAdapter implements OperationRepositoryPort {
     }
 
     @Override
+    public List<Operation> findAll() {
+        return operationJPA.findAll();
+    }
+
+    @Override
     public Operation saveOperation(Operation operation) {
         return operationJPA.save(operation);
     }

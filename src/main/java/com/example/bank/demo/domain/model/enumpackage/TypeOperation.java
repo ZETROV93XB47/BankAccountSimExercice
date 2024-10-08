@@ -8,8 +8,8 @@ import static java.util.Arrays.stream;
 @Getter
 @RequiredArgsConstructor
 public enum TypeOperation {
-    RETRAIT(1),
-    DEPOT(2);
+    WITHDRAWAL(1),
+    DEPOSIT(2);
 
     private final Integer code;
 

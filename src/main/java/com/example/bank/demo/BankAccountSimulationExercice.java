@@ -9,11 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
 @SpringBootApplication
-public class DemoApplication  implements CommandLineRunner {
-	private static final Logger LOGGER = LoggerFactory.getLogger(DemoApplication.class);
+public class BankAccountSimulationExercice implements CommandLineRunner {
+	private static final Logger LOGGER = LoggerFactory.getLogger(BankAccountSimulationExercice.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(BankAccountSimulationExercice.class, args);
 	}
 
 	@Override

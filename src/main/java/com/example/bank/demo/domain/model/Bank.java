@@ -4,6 +4,7 @@ import com.example.bank.demo.domain.model.enumpackage.AccountType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import java.util.UUID;
 @Entity
 @Setter
 @Getter
-@Builder
 @ToString
+@SuperBuilder
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor

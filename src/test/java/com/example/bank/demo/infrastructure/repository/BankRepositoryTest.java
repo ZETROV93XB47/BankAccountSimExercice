@@ -10,6 +10,7 @@ import com.example.bank.demo.infrastructure.utils.BaseIntegTest;
 import com.example.bank.demo.infrastructure.utils.TransactionalTestingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ class BankRepositoryTest extends BaseIntegTest {
     private TransactionalTestingService transactionalTestingService;
 
     @Test
+    @DirtiesContext
     void shouldFindBankAccount() throws Throwable {
         BankAccount bankAccount = new BankAccount(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170002"), new BigDecimal("100.00"), CLASSIC_ACCOUNT, new ArrayList<>(), new BigDecimal("0.00"));
         Long savedId;
@@ -48,6 +50,7 @@ class BankRepositoryTest extends BaseIntegTest {
     }
 
     @Test
+    @DirtiesContext
     void shouldFindSavingAccount() throws Throwable {
         SavingAccount savingAccount = new SavingAccount(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170002"), new BigDecimal("100.00"), SAVING_ACCOUNT, new ArrayList<>(), new BigDecimal("1000.00"));
         Long savedId;

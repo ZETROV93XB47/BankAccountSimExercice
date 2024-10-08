@@ -14,9 +14,9 @@ import java.util.UUID;
 @Getter
 @Entity
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "bank_account")
 public class BankAccount extends Bank {
 

@@ -1,6 +1,5 @@
 package com.example.bank.demo.infrastructure.adapters.out.bank_account;
 
-import com.example.bank.demo.domain.model.Bank;
 import com.example.bank.demo.domain.model.BankAccount;
 import com.example.bank.demo.domain.ports.out.bank_account.BankAccountRepositoryPort;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import java.util.Optional;
 public class BankAccountRepositoryAdapter implements BankAccountRepositoryPort {
 
     private final BankAccountJpa bankAccountJpa;
-
 
     @Override
     public BankAccount saveBankAccount(BankAccount bankAccount) {
