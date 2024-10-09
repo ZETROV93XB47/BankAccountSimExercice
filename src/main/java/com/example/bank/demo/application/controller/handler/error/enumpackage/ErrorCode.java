@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     APPLICATION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, ErrorCodeType.TECHNICAL),
+    RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, ErrorCodeType.TECHNICAL),
     WITHDRAWAL_EXCEEDING_OVERDRAFT(HttpStatus.FORBIDDEN, ErrorCodeType.FUNCTIONAL),
     ACCOUNT_NOT_FOUND(HttpStatus.NOT_FOUND, ErrorCodeType.FUNCTIONAL),
     DEPOSIT_LIMIT_REACHED(HttpStatus.FORBIDDEN, ErrorCodeType.FUNCTIONAL),

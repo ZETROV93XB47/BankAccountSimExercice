@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+//TODO: Séparer les Entité du domaine pour toutes les Entities
+
 @Setter
 @Getter
 @Entity

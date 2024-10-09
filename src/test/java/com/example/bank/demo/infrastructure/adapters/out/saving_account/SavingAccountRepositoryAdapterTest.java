@@ -44,4 +44,19 @@ class SavingAccountRepositoryAdapterTest {
         assertThat(foundedSavingAccount).isNotEmpty();
         assertThat(foundedSavingAccount).contains(savingAccount);
     }
+
+    @Test
+    void shouldSaveSavingAccount() {
+        SavingAccount savingAccount = new SavingAccount(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170003"), new BigDecimal("100.00"), SAVING_ACCOUNT, new ArrayList<>(), new BigDecimal("1000.00"));
+
+        when(savingAccountJpa.save(savingAccount)).thenReturn(savingAccount);
+
+        SavingAccount savedBank = savingAccountRepositoryAdapter.saveSavingAccount(savingAccount);
+
+        verify(savingAccountJpa).save(savingAccount);
+
+        assertThat(savedBank)
+                .isNotNull()
+                .isEqualTo(savingAccount);
+    }
 }

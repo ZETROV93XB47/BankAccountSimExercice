@@ -1,6 +1,5 @@
 package com.example.bank.demo.infrastructure.adapters.out.bank_account;
 
-import com.example.bank.demo.domain.model.Bank;
 import com.example.bank.demo.domain.model.BankAccount;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,6 +43,21 @@ class BankAccountRepositoryAdapterTest {
 
         assertThat(bank).isNotEmpty();
         assertThat(bank).contains(bankAccount);
+    }
+
+    @Test
+    void shouldSaveBankAccount() {
+        BankAccount bankAccount = new BankAccount(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170003"), new BigDecimal("100.00"), CLASSIC_ACCOUNT, new ArrayList<>(), new BigDecimal("0.00"));
+
+        when(bankAccountJpa.save(bankAccount)).thenReturn(bankAccount);
+
+        BankAccount savedBank = bankAccountRepositoryAdapter.saveBankAccount(bankAccount);
+
+        verify(bankAccountJpa).save(bankAccount);
+
+        assertThat(savedBank)
+                .isNotNull()
+                .isEqualTo(bankAccount);
     }
 
 }

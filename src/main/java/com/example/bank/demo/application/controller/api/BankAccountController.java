@@ -18,10 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
@@ -29,6 +26,7 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "BankAccountController")
+@RequestMapping("/bank/services")
 public class BankAccountController {
 
     private final MakeDepositUseCase makeDepositUseCase;
@@ -45,7 +43,7 @@ public class BankAccountController {
                             content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "Resource not found",
                             content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))})
-    @PostMapping(value = "/bank/services/deposit", produces = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/deposit", produces = APPLICATION_JSON_VALUE)
     public DepositResponseDto makeDeposit(@Valid @RequestBody DepositRequestDto requestDto) {
         return makeDepositUseCase.makeDeposit(requestDto.getDepositAmount(), requestDto.getAccountId());
     }
@@ -60,7 +58,7 @@ public class BankAccountController {
                             content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "Resource not found",
                             content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))})
-    @PostMapping(value = "/bank/services/withdrawal", produces = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/withdrawal", produces = APPLICATION_JSON_VALUE)
     public WithdrawalResponseDto makeWithdrawal(@Valid @RequestBody WithdrawalRequestDto requestDto) {
         return makeWithDrawalUseCase.makeWithdrawal(requestDto.getWithdrawalAmount(), requestDto.getAccountId());
     }
@@ -73,12 +71,12 @@ public class BankAccountController {
                             content = @Content(schema = @Schema(implementation = ErrorResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "Resource not found",
                             content = @Content(schema = @Schema(implementation = ErrorResponseDto.class)))})
-    @PostMapping(value = "/bank/services/report", produces = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/report", produces = APPLICATION_JSON_VALUE)
     public OperationReportResponseDto getOperations(@Valid @RequestBody AccountReportRequestDto requestDto) {
         return operationsReportUseCase.getOperationsReport(requestDto.getAccountId());
     }
 
-    @GetMapping(value = "/bank/services/healthCheck", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/healthCheck", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<String> healthCheck() {
         return ok("Hello Guys !!! 😁🔥🔥🔥");
     }

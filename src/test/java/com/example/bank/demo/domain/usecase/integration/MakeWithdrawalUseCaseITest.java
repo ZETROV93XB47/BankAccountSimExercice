@@ -35,6 +35,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class MakeWithdrawalUseCaseITest extends BaseIntegTest {
     @Autowired
     private MockMvc mockMvc;
@@ -58,7 +59,6 @@ class MakeWithdrawalUseCaseITest extends BaseIntegTest {
     private Resource responseForWithdrawalAmountBiggerThanBalanceException;
 
     @Test
-    @DirtiesContext
     void shouldSuccedMakingAWithdrawal() throws Throwable {
         BankAccount account = saveDataForBankAccount("250.00");
 
@@ -97,7 +97,6 @@ class MakeWithdrawalUseCaseITest extends BaseIntegTest {
     }
 
     @Test
-    @DirtiesContext
     void shouldFailMakingAWithdrawalOnNormalAccount() throws Throwable {
 
         BankAccount account = saveDataForBankAccount("250.00");

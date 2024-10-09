@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import static com.example.bank.demo.application.controller.handler.error.enumpackage.ErrorCode.*;
 
@@ -42,7 +43,13 @@ public class ErrorManagementController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto("Requete mal composee", INVALID_REQUEST.getResponseStatus().value(), INVALID_REQUEST.getErrorCodeType());
-        return new ResponseEntity<>(errorResponseDto, DEPOSIT_LIMIT_REACHED.getResponseStatus());
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto("Invalid Request or Request Poorly Constructed", INVALID_REQUEST.getResponseStatus().value(), INVALID_REQUEST.getErrorCodeType());
+        return new ResponseEntity<>(errorResponseDto, INVALID_REQUEST.getResponseStatus());
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ErrorResponseDto> handleNoResourceFoundException(NoResourceFoundException exception) {
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto("The page you're asking for doesn't exists :(", RESOURCE_NOT_FOUND.getResponseStatus().value(), RESOURCE_NOT_FOUND.getErrorCodeType());
+        return new ResponseEntity<>(errorResponseDto, RESOURCE_NOT_FOUND.getResponseStatus());
     }
 }

@@ -37,6 +37,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class MakeDepositUseCaseServiceITest extends BaseIntegTest {
 
     @Autowired
@@ -64,7 +65,6 @@ class MakeDepositUseCaseServiceITest extends BaseIntegTest {
     private Resource responseForDepositLimitExceededException;
 
     @Test
-    @DirtiesContext
     void shouldSucceedMakingADeposit() throws Throwable {
 
         BankAccount account = saveDataForBankAccount("100.00");
@@ -103,7 +103,6 @@ class MakeDepositUseCaseServiceITest extends BaseIntegTest {
     }
 
     @Test
-    @DirtiesContext
     void shouldFailMakingADepositOnSavingAccount() throws Throwable {
 
         SavingAccount account = saveDataForSavingAccount("1000.00");

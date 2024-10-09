@@ -66,4 +66,34 @@ class BankRepositoryAdapterTest {
         assertThat(bank).isNotEmpty();
         assertThat(bank).contains(bankAccount);
     }
+
+    //TODO: Vérifier la pertinence de ce test après
+    @Test
+    void shouldSaveBankAccount() {
+        BankAccount bankAccount = new BankAccount(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170003"), new BigDecimal("100.00"), CLASSIC_ACCOUNT, new ArrayList<>(), new BigDecimal("0.00"));
+
+        when(bankJpa.save(bankAccount)).thenReturn(bankAccount);
+
+        Bank savedBank = bankRepositoryAdapter.saveBank(bankAccount);
+
+        verify(bankJpa).save(bankAccount);
+
+        assertThat(savedBank).isNotNull();
+        assertThat(savedBank).isEqualTo(bankAccount);
+    }
+
+    //TODO: Vérifier la pertinence de ce test après
+    @Test
+    void shouldSaveSavingAccount() {
+        SavingAccount savingAccount = new SavingAccount(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170003"), new BigDecimal("100.00"), SAVING_ACCOUNT, new ArrayList<>(), new BigDecimal("1000.00"));
+
+        when(bankJpa.save(savingAccount)).thenReturn(savingAccount);
+
+        Bank savedBank = bankRepositoryAdapter.saveBank(savingAccount);
+
+        verify(bankJpa).save(savingAccount);
+
+        assertThat(savedBank).isNotNull();
+        assertThat(savedBank).isEqualTo(savingAccount);
+    }
 }
