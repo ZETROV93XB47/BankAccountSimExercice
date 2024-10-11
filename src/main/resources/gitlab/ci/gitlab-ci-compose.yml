@@ -1,0 +1,47 @@
+services:
+  gitlab:
+    restart: unless-stopped
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+    ports:
+      - '8085:80'
+      - '2222:22'
+    volumes:
+      - 'data:/var/opt/gitlab'
+      - 'config:/etc/gitlab'
+      - 'logs:/var/log/gitlab'
+    shm_size: 3gb
+    networks:
+      - gitlab-network
+
+  gitlab-runner:
+    restart: unless-stopped
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - 'runner:/etc/gitlab-runner'
+      - 'config:/etc/gitlab'
+    networks:
+      - gitlab-network
+
+networks:
+  gitlab-network:
+    driver: bridge
+
+volumes:
+  config:
+    driver: local
+  data:
+    driver: local
+  runner:
+    driver: local
+  logs:
+    driver: local
+
+#URL Serveur GitLab : http://gitlab/
+#docker exec -it gitlab-runner gitlab-runner register
+#executor docker image maven:latest

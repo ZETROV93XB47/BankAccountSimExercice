@@ -1,0 +1,30 @@
+image: maven:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+# Job de build
+build:
+  stage: build
+  script:
+    - mvn clean install
+  artifacts:
+    paths:
+      - target/*.jar
+
+# Job de tests
+test:
+  stage: test
+  script:
+    - mvn test
+
+# Job de déploiement (optionnel)
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying the application..."
+    # Ajoute ici les commandes pour déployer ton artefact ou utiliser Docker pour le conteneuriser
+  only:
+    - master

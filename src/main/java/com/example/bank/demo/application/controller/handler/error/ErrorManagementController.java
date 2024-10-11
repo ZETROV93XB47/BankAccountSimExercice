@@ -6,6 +6,8 @@ import com.example.bank.demo.domain.exceptions.AccountNotFoundException;
 import com.example.bank.demo.domain.exceptions.DepositLimitExceededException;
 import com.example.bank.demo.domain.exceptions.OperationNotFoundException;
 import com.example.bank.demo.domain.exceptions.WithdrawalAmountBiggerThanBalanceException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -51,5 +53,10 @@ public class ErrorManagementController {
     public ResponseEntity<ErrorResponseDto> handleNoResourceFoundException(NoResourceFoundException exception) {
         ErrorResponseDto errorResponseDto = new ErrorResponseDto("The page you're asking for doesn't exists :(", RESOURCE_NOT_FOUND.getResponseStatus().value(), RESOURCE_NOT_FOUND.getErrorCodeType());
         return new ResponseEntity<>(errorResponseDto, RESOURCE_NOT_FOUND.getResponseStatus());
+    }
+
+    @ExceptionHandler(UnrecognizedPropertyException.class)
+    public ResponseEntity<String> handleUnrecognizedPropertyException(UnrecognizedPropertyException ex) {
+        return new ResponseEntity<>("Invalid request: Unknown property '" + ex.getPropertyName() + "'", HttpStatus.BAD_REQUEST);
     }
 }
