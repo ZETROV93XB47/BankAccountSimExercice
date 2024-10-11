@@ -9,6 +9,7 @@ stages:
 build:
   stage: build
   script:
+    - git clone http://localhost:8085/reznovgroup/bankaccountsimulationexercise.git
     - mvn clean install
   artifacts:
     paths:
