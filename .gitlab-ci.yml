@@ -25,6 +25,6 @@ deploy:
   stage: deploy
   script:
     - echo "Deploying the application..."
-    # Ajoute ici les commandes pour déployer ton artefact ou utiliser Docker pour le conteneuriser
+
   only:
     - master
