@@ -1,6 +1,6 @@
 package com.example.bank.demo.domain.ports.mapper;
 
-import com.example.bank.demo.domain.dto.response.OperationReportResponseDto;
+import com.example.bank.demo.application.controller.dto.response.OperationReportResponseDto;
 import com.example.bank.demo.domain.model.Operation;
 
 import java.util.List;

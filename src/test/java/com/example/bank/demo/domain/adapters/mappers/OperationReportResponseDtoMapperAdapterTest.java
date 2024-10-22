@@ -1,6 +1,7 @@
 package com.example.bank.demo.domain.adapters.mappers;
 
-import com.example.bank.demo.domain.dto.response.OperationReportResponseDto;
+import com.example.bank.demo.application.controller.dto.response.OperationReportResponseDto;
+import com.example.bank.demo.application.controller.mappers.OperationReportResponseDtoMapperAdapter;
 import com.example.bank.demo.domain.model.BankAccount;
 import com.example.bank.demo.domain.model.Operation;
 import org.junit.jupiter.api.Test;

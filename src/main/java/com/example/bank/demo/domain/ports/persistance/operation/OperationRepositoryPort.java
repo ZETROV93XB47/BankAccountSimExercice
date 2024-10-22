@@ -1,0 +1,15 @@
+package com.example.bank.demo.domain.ports.persistance.operation;
+
+import com.example.bank.demo.domain.model.Bank;
+import com.example.bank.demo.domain.model.Operation;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface OperationRepositoryPort {
+    Optional<List<Operation>> findByAccountIdOrderByDateOperationDesc(Bank accountId);
+
+    List<Operation> findAll();
+
+    Operation saveOperation (Operation operation);
+}

@@ -3,6 +3,8 @@ package com.example.bank.demo.infrastructure.adapters.out.bank;
 import com.example.bank.demo.domain.model.Bank;
 import com.example.bank.demo.domain.model.BankAccount;
 import com.example.bank.demo.domain.model.SavingAccount;
+import com.example.bank.demo.infrastructure.adapters.saving_account.bank.BankJpa;
+import com.example.bank.demo.infrastructure.adapters.saving_account.bank.BankRepositoryAdapter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

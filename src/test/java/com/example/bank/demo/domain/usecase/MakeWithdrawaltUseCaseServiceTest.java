@@ -1,17 +1,17 @@
 package com.example.bank.demo.domain.usecase;
 
-import com.example.bank.demo.domain.adapters.service.MakeWithdrawalUseCaseService;
-import com.example.bank.demo.domain.dto.response.WithdrawalResponseDto;
-import com.example.bank.demo.domain.exceptions.AccountNotFoundException;
-import com.example.bank.demo.domain.exceptions.WithdrawalAmountBiggerThanBalanceException;
 import com.example.bank.demo.domain.model.BankAccount;
 import com.example.bank.demo.domain.model.Operation;
 import com.example.bank.demo.domain.model.SavingAccount;
+import com.example.bank.demo.domain.service.MakeWithdrawalUseCaseService;
+import com.example.bank.demo.application.controller.dto.response.WithdrawalResponseDto;
+import com.example.bank.demo.domain.exceptions.AccountNotFoundException;
+import com.example.bank.demo.domain.exceptions.WithdrawalAmountBiggerThanBalanceException;
 import com.example.bank.demo.domain.ports.mapper.WithdrawalResponseDtoMapperPort;
-import com.example.bank.demo.domain.ports.out.bank.BankRepositoryPort;
-import com.example.bank.demo.domain.ports.out.bank_account.BankAccountRepositoryPort;
-import com.example.bank.demo.domain.ports.out.operation.OperationRepositoryPort;
-import com.example.bank.demo.domain.ports.out.saving_account.SavingAccountRepositoryPort;
+import com.example.bank.demo.domain.ports.persistance.bank.BankRepositoryPort;
+import com.example.bank.demo.domain.ports.persistance.bank_account.BankAccountRepositoryPort;
+import com.example.bank.demo.domain.ports.persistance.operation.OperationRepositoryPort;
+import com.example.bank.demo.domain.ports.persistance.saving_account.SavingAccountRepositoryPort;
 import com.example.bank.demo.domain.utils.DateProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

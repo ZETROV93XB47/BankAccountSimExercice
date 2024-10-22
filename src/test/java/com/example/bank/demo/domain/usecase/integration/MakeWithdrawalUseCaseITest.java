@@ -2,8 +2,8 @@ package com.example.bank.demo.domain.usecase.integration;
 
 import com.example.bank.demo.domain.model.BankAccount;
 import com.example.bank.demo.domain.model.Operation;
-import com.example.bank.demo.domain.ports.out.bank_account.BankAccountRepositoryPort;
-import com.example.bank.demo.domain.ports.out.operation.OperationRepositoryPort;
+import com.example.bank.demo.domain.ports.persistance.bank_account.BankAccountRepositoryPort;
+import com.example.bank.demo.domain.ports.persistance.operation.OperationRepositoryPort;
 import com.example.bank.demo.domain.utils.DateProvider;
 import com.example.bank.demo.infrastructure.utils.BaseIntegTest;
 import com.example.bank.demo.infrastructure.utils.TransactionalTestingService;

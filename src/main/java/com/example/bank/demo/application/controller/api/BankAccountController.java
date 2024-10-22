@@ -1,12 +1,12 @@
 package com.example.bank.demo.application.controller.api;
 
 import com.example.bank.demo.application.controller.handler.error.model.ErrorResponseDto;
-import com.example.bank.demo.domain.dto.request.AccountReportRequestDto;
-import com.example.bank.demo.domain.dto.request.DepositRequestDto;
-import com.example.bank.demo.domain.dto.request.WithdrawalRequestDto;
-import com.example.bank.demo.domain.dto.response.DepositResponseDto;
-import com.example.bank.demo.domain.dto.response.OperationReportResponseDto;
-import com.example.bank.demo.domain.dto.response.WithdrawalResponseDto;
+import com.example.bank.demo.application.controller.dto.request.AccountReportRequestDto;
+import com.example.bank.demo.application.controller.dto.request.DepositRequestDto;
+import com.example.bank.demo.application.controller.dto.request.WithdrawalRequestDto;
+import com.example.bank.demo.application.controller.dto.response.DepositResponseDto;
+import com.example.bank.demo.application.controller.dto.response.OperationReportResponseDto;
+import com.example.bank.demo.application.controller.dto.response.WithdrawalResponseDto;
 import com.example.bank.demo.domain.ports.useCase.MakeDepositUseCase;
 import com.example.bank.demo.domain.ports.useCase.MakeWithDrawalUseCase;
 import com.example.bank.demo.domain.ports.useCase.OperationsReportUseCase;
