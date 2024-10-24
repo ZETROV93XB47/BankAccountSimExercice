@@ -1,4 +1,4 @@
-package com.example.bank.demo.infrastructure.adapters.saving_account.operation;
+package com.example.bank.demo.infrastructure.adapters.persistence.operation;
 
 import com.example.bank.demo.domain.model.Bank;
 import com.example.bank.demo.domain.model.Operation;

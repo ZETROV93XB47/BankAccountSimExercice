@@ -2,8 +2,8 @@ package com.example.bank.demo.infrastructure.adapters.out.operation;
 
 import com.example.bank.demo.domain.model.BankAccount;
 import com.example.bank.demo.domain.model.Operation;
-import com.example.bank.demo.infrastructure.adapters.saving_account.operation.OperationJpa;
-import com.example.bank.demo.infrastructure.adapters.saving_account.operation.OperationRepositoryAdapter;
+import com.example.bank.demo.infrastructure.adapters.persistence.operation.OperationJpa;
+import com.example.bank.demo.infrastructure.adapters.persistence.operation.OperationRepositoryAdapter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

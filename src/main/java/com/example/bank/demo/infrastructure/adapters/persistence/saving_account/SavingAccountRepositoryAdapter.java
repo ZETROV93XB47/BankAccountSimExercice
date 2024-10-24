@@ -1,4 +1,4 @@
-package com.example.bank.demo.infrastructure.adapters.saving_account.saving_account;
+package com.example.bank.demo.infrastructure.adapters.persistence.saving_account;
 
 import com.example.bank.demo.domain.model.SavingAccount;
 import com.example.bank.demo.domain.ports.persistance.saving_account.SavingAccountRepositoryPort;

@@ -1,4 +1,4 @@
-package com.example.bank.demo.domain.model;
+package com.example.bank.demo.infrastructure.entity;
 
 import com.example.bank.demo.domain.model.enumpackage.AccountType;
 import com.example.bank.demo.domain.model.enumpackage.TypeOperation;
@@ -12,13 +12,12 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Builder
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "operation")
-public class Operation {
+public class OperationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +25,7 @@ public class Operation {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "accountid", nullable = false)
-    private Bank accountId;
+    private BankEntity accountId;
 
     @Column(name = "typeoperation", nullable = false)
     private TypeOperation typeOperation;
