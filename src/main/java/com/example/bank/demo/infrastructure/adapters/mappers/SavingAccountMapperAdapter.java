@@ -21,7 +21,7 @@ public class SavingAccountMapperAdapter implements SavingAccountMapperPort {
                 .accountId(savingAccountEntity.getAccountId())
                 .balance(savingAccountEntity.getBalance())
                 .depositLimit(savingAccountEntity.getDepositLimit())
-                .operations(operationMapperPort.mapToOperation(savingAccountEntity.getOperations()))
+                .operations(operationMapperPort.mapToOperations(savingAccountEntity.getOperations()))
                 .build();
     }
 }

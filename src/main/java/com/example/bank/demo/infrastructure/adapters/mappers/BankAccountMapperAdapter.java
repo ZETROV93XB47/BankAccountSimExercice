@@ -18,7 +18,7 @@ public class BankAccountMapperAdapter implements BankAccountMapperPort {
 
 
         return BankAccount.builder()
-                .operations(operationMapperPort.mapToOperation(bankAccountEntity.getOperations()))
+                .operations(operationMapperPort.mapToOperations(bankAccountEntity.getOperations()))
                 .overdraftLimit(bankAccountEntity.getOverdraftLimit())
                 .accountNumber(bankAccountEntity.getAccountNumber())
                 .accountType(bankAccountEntity.getAccountType())

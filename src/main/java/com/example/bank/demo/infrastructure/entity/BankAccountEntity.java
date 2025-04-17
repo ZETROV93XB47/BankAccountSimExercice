@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,9 +15,9 @@ import java.util.UUID;
 @Getter
 @Entity
 @ToString
+@SuperBuilder
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "bank_account")
 public class BankAccountEntity extends BankEntity {
 
@@ -25,7 +26,6 @@ public class BankAccountEntity extends BankEntity {
 
     public BankAccountEntity(Long accountId, UUID accountNumber, BigDecimal balance, AccountType accountType, List<OperationEntity> operations, BigDecimal overdraftLimit) {
         super(accountId, accountNumber, balance, accountType, operations);
-
         this.overdraftLimit = overdraftLimit;
     }
 }

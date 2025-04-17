@@ -9,34 +9,25 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
+//TODO: rajouter doc sur cette classe
+
 @Getter
 @Setter
 @Builder
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "operation")
 public class Operation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "accountid", nullable = false)
     private Bank accountId;
 
-    @Column(name = "typeoperation", nullable = false)
     private TypeOperation typeOperation;
 
-    @Column(nullable = false)
     private BigDecimal montant;
 
-    @Column(name = "accounttype", nullable = false)
     private AccountType accountType;
 
-    @Column(name = "dateoperation", nullable = false)
     private LocalDateTime dateOperation;
 }

@@ -13,8 +13,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@Builder
 @EqualsAndHashCode
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "operation")
 public class OperationEntity {

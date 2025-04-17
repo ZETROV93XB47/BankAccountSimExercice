@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 @SpringBootApplication
 public class BankAccountSimulationExercice implements CommandLineRunner {
-	private static final Logger LOGGER = LoggerFactory.getLogger(BankAccountSimulationExercice.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BankAccountSimulationExercice.class, args);
@@ -18,6 +17,6 @@ public class BankAccountSimulationExercice implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		LOGGER.info("Application started with success! 😁🔥🔥🔥");
+		log.info("Application started with success! 😁🔥🔥🔥");
 	}
 }

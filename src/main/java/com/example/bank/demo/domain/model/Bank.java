@@ -1,42 +1,35 @@
 package com.example.bank.demo.domain.model;
 
 import com.example.bank.demo.domain.model.enumpackage.AccountType;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Setter
+//TODO: Revoir la doc de cette classe
 @Getter
+@Setter
 @ToString
 @SuperBuilder
 @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Bank {
-    @Id
-    @Column(name = "accountid",  nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Schema(title = "Operation type", example = "DEPOSIT")
     protected Long accountId;
 
-    @Column(name = "accountnumber",  columnDefinition = "BINARY(16) NOT NULL UNIQUE", nullable = false)
+    @Schema(title = "Operation type", example = "DEPOSIT")
     protected UUID accountNumber;
 
-    @Column(name = "balance",  nullable = false)
+    @Schema(title = "Operation type", example = "DEPOSIT")
     protected BigDecimal balance;
 
-    @Column(name = "accounttype", nullable = false)
+    @Schema(title = "Operation type", example = "DEPOSIT")
     protected AccountType accountType;
 
-    @ToString.Exclude
-    @JsonManagedReference
-    @OneToMany(mappedBy = "accountId", cascade = CascadeType.ALL)
-    private List<Operation> operations = new ArrayList<>();
+    @Schema(title = "Operation type", example = "DEPOSIT")
+    private List<Operation> operations;
 }

@@ -12,6 +12,7 @@ import com.example.bank.demo.domain.ports.persistance.bank.BankRepositoryPort;
 import com.example.bank.demo.domain.ports.persistance.bank_account.BankAccountRepositoryPort;
 import com.example.bank.demo.domain.ports.persistance.operation.OperationRepositoryPort;
 import com.example.bank.demo.domain.ports.persistance.saving_account.SavingAccountRepositoryPort;
+import com.example.bank.demo.domain.ports.useCase.MakeDepositUseCase;
 import com.example.bank.demo.domain.utils.DateProvider;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ import static com.example.bank.demo.domain.model.enumpackage.TypeOperation.DEPOS
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MakeDepositUseCaseService implements com.example.bank.demo.domain.ports.useCase.MakeDepositUseCase {
+public class MakeDepositUseCaseService implements MakeDepositUseCase {
 
     private final DateProvider dateProvider;
     private final BankRepositoryPort bankRepositoryPort;

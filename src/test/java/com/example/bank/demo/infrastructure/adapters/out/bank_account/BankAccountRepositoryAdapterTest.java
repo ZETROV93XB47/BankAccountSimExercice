@@ -3,6 +3,7 @@ package com.example.bank.demo.infrastructure.adapters.out.bank_account;
 import com.example.bank.demo.domain.model.BankAccount;
 import com.example.bank.demo.infrastructure.adapters.persistence.bank_account.BankAccountJpa;
 import com.example.bank.demo.infrastructure.adapters.persistence.bank_account.BankAccountRepositoryAdapter;
+import com.example.bank.demo.infrastructure.entity.BankAccountEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,16 +32,17 @@ class BankAccountRepositoryAdapterTest {
     @Test
     void shouldFindBankAccount() {
 
+        BankAccountEntity bankAccountEntity = new BankAccountEntity(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170003"), new BigDecimal("100.00"), CLASSIC_ACCOUNT, new ArrayList<>(), new BigDecimal("0.00"));
         BankAccount bankAccount = new BankAccount(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170003"), new BigDecimal("100.00"), CLASSIC_ACCOUNT, new ArrayList<>(), new BigDecimal("0.00"));
 
-        when(bankAccountJpa.save(bankAccount)).thenReturn(bankAccount);
-        when(bankAccountJpa.findById(bankAccount.getAccountId())).thenReturn(Optional.of(bankAccount));
+        when(bankAccountJpa.save(bankAccountEntity)).thenReturn(bankAccountEntity);
+        when(bankAccountJpa.findById(bankAccount.getAccountId())).thenReturn(Optional.of(bankAccountEntity));
 
         Long savedId = bankAccountRepositoryAdapter.saveBankAccount(bankAccount).getAccountId();
 
         Optional<BankAccount> bank = bankAccountRepositoryAdapter.findById(savedId);
 
-        verify(bankAccountJpa).save(bankAccount);
+        verify(bankAccountJpa).save(bankAccountEntity);
         verify(bankAccountJpa).findById(bankAccount.getAccountId());
 
         assertThat(bank).isNotEmpty();
@@ -50,12 +52,13 @@ class BankAccountRepositoryAdapterTest {
     @Test
     void shouldSaveBankAccount() {
         BankAccount bankAccount = new BankAccount(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170003"), new BigDecimal("100.00"), CLASSIC_ACCOUNT, new ArrayList<>(), new BigDecimal("0.00"));
+        BankAccountEntity bankAccountEntity = new BankAccountEntity(null, UUID.fromString("745c6891-1122-11ef-bee2-0242ac170003"), new BigDecimal("100.00"), CLASSIC_ACCOUNT, new ArrayList<>(), new BigDecimal("0.00"));
 
-        when(bankAccountJpa.save(bankAccount)).thenReturn(bankAccount);
+        when(bankAccountJpa.save(bankAccountEntity)).thenReturn(bankAccountEntity);
 
         BankAccount savedBank = bankAccountRepositoryAdapter.saveBankAccount(bankAccount);
 
-        verify(bankAccountJpa).save(bankAccount);
+        verify(bankAccountJpa).save(bankAccountEntity);
 
         assertThat(savedBank)
                 .isNotNull()

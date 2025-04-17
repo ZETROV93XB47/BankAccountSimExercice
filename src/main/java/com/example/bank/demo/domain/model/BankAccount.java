@@ -13,13 +13,9 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@Entity
 @ToString
 @SuperBuilder
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "bank_account")
+@EqualsAndHashCode(callSuper = false)
 public class BankAccount extends Bank {
 
     @Column(name = "overdraft",  nullable = false)

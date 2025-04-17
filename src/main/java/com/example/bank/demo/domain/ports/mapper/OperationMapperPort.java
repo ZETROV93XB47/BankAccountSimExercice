@@ -6,5 +6,7 @@ import com.example.bank.demo.infrastructure.entity.OperationEntity;
 import java.util.List;
 
 public interface OperationMapperPort {
-    List<Operation> mapToOperation(List<OperationEntity> operationEntity);
+    List<Operation> mapToOperations(List<OperationEntity> operationEntity);
+
+    Operation mapToOperation(OperationEntity operationEntity);
 }

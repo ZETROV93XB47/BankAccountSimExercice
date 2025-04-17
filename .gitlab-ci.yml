@@ -1,31 +1,31 @@
-image: maven:latest
-
-stages:
-  - build
-  - test
-  - deploy
-
-# Job de build
-build:
-  stage: build
-  script:
-    - git clone http://localhost:8085/reznovgroup/bankaccountsimulationexercise.git
-    - mvn clean install
-  artifacts:
-    paths:
-      - target/*.jar
-
-# Job de tests
-test:
-  stage: test
-  script:
-    - mvn test
-
-# Job de déploiement (optionnel)
-deploy:
-  stage: deploy
-  script:
-    - echo "Deploying the application..."
-
-  only:
-    - master
+#image: maven:latest
+#
+#stages:
+#  - build
+#  - test
+#  - deploy
+#
+## Job de build
+#build:
+#  stage: build
+#  script:
+#    - git clone http://localhost:8085/reznovgroup/bankaccountsimulationexercise.git
+#    - mvn clean install
+#  artifacts:
+#    paths:
+#      - target/*.jar
+#
+## Job de tests
+#test:
+#  stage: test
+#  script:
+#    - mvn test
+#
+## Job de déploiement (optionnel)
+#deploy:
+#  stage: deploy
+#  script:
+#    - echo "Deploying the application..."
+#
+#  only:
+#    - master

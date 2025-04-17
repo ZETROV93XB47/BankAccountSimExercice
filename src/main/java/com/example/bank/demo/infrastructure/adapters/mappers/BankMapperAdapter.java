@@ -16,7 +16,7 @@ public class BankMapperAdapter implements BankMapperPort {
     @Override
     public Bank mapToBank(BankEntity bankEntity) {
         return Bank.builder()
-                .operations(operationMapperPort.mapToOperation(bankEntity.getOperations()))
+                .operations(operationMapperPort.mapToOperations(bankEntity.getOperations()))
                 .accountNumber(bankEntity.getAccountNumber())
                 .accountType(bankEntity.getAccountType())
                 .accountId(bankEntity.getAccountId())

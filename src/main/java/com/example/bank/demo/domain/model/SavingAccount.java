@@ -15,13 +15,9 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@Entity
 @ToString
 @SuperBuilder
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "saving_account")
+@EqualsAndHashCode(callSuper = false)
 public class SavingAccount extends Bank {
 
     @Column(name = "depositlimit",  nullable = false)

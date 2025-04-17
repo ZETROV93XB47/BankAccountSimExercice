@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class BankEntity {
+public class BankEntity implements Serializable {
     @Id
     @Column(name = "accountid", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +37,6 @@ public class BankEntity {
 
     @ToString.Exclude
     @JsonManagedReference
-    @OneToMany(mappedBy = "accountId", cascade = CascadeType.ALL)
-    private List<OperationEntity> operations = new ArrayList<>();
+    @OneToMany(mappedBy = "accountId", cascade = CascadeType.PERSIST)
+    private List<OperationEntity> operations;
 }

@@ -10,6 +10,7 @@ import com.example.bank.demo.domain.ports.persistance.bank.BankRepositoryPort;
 import com.example.bank.demo.domain.ports.persistance.operation.OperationRepositoryPort;
 import com.example.bank.demo.domain.ports.useCase.OperationsReportUseCase;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OperationsReportUseCaseService implements OperationsReportUseCase {
@@ -24,7 +26,6 @@ public class OperationsReportUseCaseService implements OperationsReportUseCase {
     private final BankRepositoryPort bankRepositoryPort;
     private final OperationRepositoryPort operationRepositoryPort;
     private final OperationReportResponseDtoMapperPort operationReportResponseDtoMapperPort;
-    private static final Logger LOGGER = LoggerFactory.getLogger(OperationsReportUseCaseService.class);
 
     @Override
     public OperationReportResponseDto getOperationsReport(Long accountId) {
@@ -34,7 +35,7 @@ public class OperationsReportUseCaseService implements OperationsReportUseCase {
 
         if (account.isPresent()) {
             accountForOperations = account.get();
-            LOGGER.info("account found for id : {}", accountForOperations.getAccountId());
+            log.info("account found for id : {}", accountForOperations.getAccountId());
 
         } else {
             throw new AccountNotFoundException("Account not found for id : " + accountId);
@@ -43,7 +44,7 @@ public class OperationsReportUseCaseService implements OperationsReportUseCase {
         List<Operation> operations = operationRepositoryPort.findByAccountIdOrderByDateOperationDesc(accountForOperations)
                 .orElseThrow(() -> new OperationNotFoundException("No Operation found for account Id : " + accountId));
 
-        LOGGER.info("Associated Operations on this account found ");
+        log.info("Associated Operations on this account found ");
 
         return operationReportResponseDtoMapperPort.mapToOperationResponseDto(operations, accountForOperations.getAccountNumber());
     }

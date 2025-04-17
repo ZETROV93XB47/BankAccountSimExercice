@@ -73,11 +73,12 @@ public class MakeWithdrawalUseCaseService implements MakeWithDrawalUseCase {
         return withdrawalResponseDtoMapperPort.mapToWithdrawalResponseDto(bankAccount);
     }
 
+    //TODO: Retirer les Dto du domaine
     private WithdrawalResponseDto makeWithdrawalOnSavingAccount(final SavingAccount savingAccount, final BigDecimal withdrawalValue) {
         BigDecimal currentBalance = savingAccount.getBalance();
 
         if (currentBalance.subtract(withdrawalValue).compareTo(new BigDecimal(0)) < 0) {
-            throw new WithdrawalAmountBiggerThanBalanceException("Le montant que vous tentez de retirer est supérieur au montant autorisé pour votre compte");
+            throw new WithdrawalAmountBiggerThanBalanceException("Le montant que vous tentez de retirer est supérieur à votre solde");
         }
 
         savingAccount.setBalance(currentBalance.subtract(withdrawalValue));
@@ -89,7 +90,7 @@ public class MakeWithdrawalUseCaseService implements MakeWithDrawalUseCase {
         return withdrawalResponseDtoMapperPort.mapToWithdrawalResponseDto(savingAccount);
     }
 
-    private void saveAssociatedOperation(BigDecimal withdrawalValue, Bank accountForwithdrawal) {
+    private void saveAssociatedOperation(final BigDecimal withdrawalValue, final Bank accountForwithdrawal) {
         Operation operation = new Operation(null, accountForwithdrawal, WITHDRAWAL, withdrawalValue, accountForwithdrawal.getAccountType(), dateProvider.getCurrentDate());
 
         operationRepositoryPort.saveOperation(operation);

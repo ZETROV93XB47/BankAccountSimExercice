@@ -15,7 +15,7 @@ import java.util.List;
 public class OperationMapperAdapter implements OperationMapperPort {
 
     @Override
-    public List<Operation> mapToOperation(List<OperationEntity> operationEntity) {
+    public List<Operation> mapToOperations(List<OperationEntity> operationEntity) {
         return operationEntity.stream()
                 .map(operationEntity1 -> Operation.builder()
                         .accountId(createBank(operationEntity1.getAccountId()))
@@ -25,6 +25,17 @@ public class OperationMapperAdapter implements OperationMapperPort {
                         .id(operationEntity1.getId())
                         .build())
                 .toList();
+    }
+
+    @Override
+    public Operation mapToOperation(OperationEntity operationEntity) {
+        return Operation.builder()
+                .accountId(createBank(operationEntity.getAccountId()))
+                .dateOperation(operationEntity.getDateOperation())
+                .typeOperation(operationEntity.getTypeOperation())
+                .accountType(operationEntity.getAccountType())
+                .id(operationEntity.getId())
+                .build();
     }
 
     //TODO: J'aurais du rajouter les operation normalement mais j'ai une dépendance circulaire en faisant ça
